@@ -1,0 +1,153 @@
+package PageObject;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+
+public class FormOrderPage {
+    WebDriver driver;
+
+    public FormOrderPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+
+
+    //Поле ввода "Имя"
+    By nameLocator = By.cssSelector("input[placeholder='* Имя']");
+
+    //Поле ввода "Фамилия"
+    By surnameLocator = By.cssSelector("input[placeholder='* Фамилия']");
+
+    //Поле ввода "Адрес"
+    By locationLocator = By.cssSelector("input[placeholder='* Адрес: куда привезти заказ']");
+
+    //Поле ввода "Станция метро"
+    By metroStationLocator = By.cssSelector("input[placeholder='* Станция метро']");
+
+    //Поле ввода "Телефон"
+    By phoneLocator = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
+
+    //Кнопка "Далее"
+    By buttonForchLocator = By.cssSelector(".Button_Button__ra12g.Button_Middle__1CSJM");
+
+    //Поле ввода даты "Когда привезти самокат"
+    By dateOrderLocator = By.cssSelector("input[placeholder='* Когда привезти самокат']");
+
+    //Открыть выпадающий список "Срок аренды"
+    By openRentalListLocator = By.cssSelector(".Dropdown-arrow");
+
+                        //Выбор элемента списка "Сутки"
+                        By orderDey1Locator = By.xpath("//div[@role='option'][contains(text(),'сутки')]");
+                        //Выбор элемента списка "Двое суток"
+                        By orderDey2Locator = By.xpath("//div[@role='option'][contains(text(),'двое суток')]");
+                        //Выбор элемента списка "Трое суток"
+                        By orderDey3Locator = By.xpath("//div[@role='option'][contains(text(),'трое суток')]");
+                        //Выбор элемента списка "Четверо суток"
+                        By orderDey4Locator = By.xpath("//div[@role='option'][contains(text(),'четверо суток')]");
+                        //Выбор элемента списка "Пятеро суток"
+                        By orderDey5Locator = By.xpath("//div[@role='option'][contains(text(),'пятеро суток')]");
+                        //Выбор элемента списка "Шестеро суток"
+                        By orderDey6Locator = By.xpath("//div[@role='option'][contains(text(),'шестеро суток')]");
+                        //Выбор элемента списка "Семеро суток"
+                        By orderDey7Locator = By.xpath("//div[@role='option'][contains(text(),'семеро суток')]");
+
+
+
+    //Выбор цвета самоката
+    //"Черный жемчуг"
+    By blackColorScooterLocator = By.xpath("//input[@id='black']");
+    //"Серая безысходность
+    By greyColorScooterLocator = By.xpath("//input[@id='grey']");
+
+    //Поле ввода "Коментарий для курьера"
+    By commentCourierLocator = By.cssSelector("input[placeholder='Комментарий для курьера']");
+
+    //Кнопка в форме "Заказать"
+    By buttonFormOrderLocator = By.cssSelector("button[class='Button_Button__ra12g Button_Middle__1CSJM']");
+    //Кнопка подтверждения заказа "Да"
+    By buttonYesOrderLocator = By.cssSelector("div[class='Order_Modal__YZ-d3'] button[class='Button_Button__ra12g Button_Middle__1CSJM']");
+
+
+
+
+    //Вводим имя
+    public void inputName(String name) {
+        driver.findElement(nameLocator).sendKeys(name);
+    }
+
+    //Вводим фамилию
+    public void inputSurname(String surname) {
+        driver.findElement(surnameLocator).sendKeys(surname);
+    }
+
+    //Вводим адрес
+    public void inputLocation(String location) {
+        driver.findElement(locationLocator).sendKeys(location);
+    }
+
+    //Вводим станцию метро
+    public void inputMetroStation(String metroStation) {
+        driver.findElement(metroStationLocator).sendKeys(metroStation);
+        driver.findElement(By.xpath(".//div[text()='" + metroStation + "']")).click();
+    }
+
+    //Вводим телефон
+    public void inputPhone(String phone) {
+        driver.findElement(phoneLocator).sendKeys(phone);
+    }
+
+    //Нажимаем кнопку "Далее"
+    public void clickButtonForch() {
+        driver.findElement(buttonForchLocator).click();
+    }
+
+    //Вводим дату получения самоката
+    public void inputDateOrder(String date) {
+        driver.findElement(dateOrderLocator).sendKeys(date);
+    }
+
+    //Время аренды в днях
+    public void rentalTime(String time) {
+            driver.findElement(openRentalListLocator).click();
+            if(time == "сутки") {
+                driver.findElement(orderDey1Locator).click();
+            }else if(time =="двое суток"){
+                driver.findElement(orderDey2Locator).click();
+            }else if(time =="трое суток"){
+                driver.findElement(orderDey3Locator).click();
+            }else if(time =="четверо суток"){
+                driver.findElement(orderDey4Locator).click();
+            }else if(time =="пятеро суток"){
+                driver.findElement(orderDey5Locator).click();
+            }else if(time =="шестеро суток"){
+                driver.findElement(orderDey6Locator).click();
+            }else if(time =="семеро суток"){
+                driver.findElement(orderDey7Locator).click();
+            }
+        }
+
+    //Выбор цвета самоката
+    public void clickColorScooter(String color) {
+            if (color == "Черный жемчуг" ) {
+                driver.findElement(blackColorScooterLocator).click();
+            }else if(color == "Серая безысходность"){
+                driver.findElement(greyColorScooterLocator).click();
+            }
+
+        }
+
+    //Ввоод коментария для курьера
+    public void inputComentCourier(String coment) {
+        driver.findElement(commentCourierLocator).sendKeys(coment);
+    }
+
+    //Нажимаем кнопку заказать в форме заказа
+    public void clickButtonFormOrder() {
+        driver.findElement(buttonFormOrderLocator).click();
+    }
+
+    //Нажимаем кнопку "Да" подтвердить заказ
+    public void clickButtonYesOrder() {
+        driver.findElement(buttonYesOrderLocator).click();
+        }
+    }
