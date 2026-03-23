@@ -1,9 +1,7 @@
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
-import static org.hamcrest.CoreMatchers.startsWith;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 
@@ -23,7 +21,7 @@ public class OrderTests extends BaseUITest {
     String expectedOrder = "Заказ оформлен";
 
 
-    public OrderTests(String name, String surname, String location, String metroStation, String phone, String date, String time, String color, String comment) {
+    public OrderTests (String name, String surname, String location, String metroStation, String phone, String date, String time, String color, String comment) {
         this.name = name;
         this.surname = surname;
         this.location = location;
@@ -37,7 +35,7 @@ public class OrderTests extends BaseUITest {
 
     @Parameterized.Parameters
     public static Object[][] getTest() {
-        return new Object[][]{
+        return new Object[][] {
                 {"Иван", "Иванов", "Дзержинского 85", "Черкизовская", "+79995554466", "25.03.2026", "сутки", "black", "Прихватите зарядку"},
                 {"Петр", "Петров", "Крестьянская 35", "Спортивная", "+79267775522", "31.03.2026", "четверо суток", "grey", ""},
         };
@@ -46,47 +44,19 @@ public class OrderTests extends BaseUITest {
     @Test
     public void orderHeader() {
         mainPage.clickOrderButtonHeader();
-        formOrderPage.inputName(name);
-        formOrderPage.inputSurname(surname);
-        formOrderPage.inputLocation(location);
-        formOrderPage.inputMetroStation(metroStation);
-        formOrderPage.inputPhone(phone);
-        formOrderPage.clickButtonForch();
-        formOrderPage.inputDateOrder(date);
-        formOrderPage.rentalTime(time);
-        formOrderPage.clickColorScooter(color);
-        formOrderPage.inputComentCourier(comment);
-        formOrderPage.clickButtonFormOrder();
+        formOrderPage.whoseScooter(name, surname, location, metroStation, phone);
+        formOrderPage.aboutRent(date, time, color, comment);
         formOrderPage.clickButtonYesOrder();
-
-        String actualOrder = driver.findElement(By.xpath("//div[@class='Order_ModalHeader__3FDaJ'][contains(text(), 'Заказ оформлен')]")).getText();
-
-        //Сравнение ОР с ФР
-        MatcherAssert.assertThat("Заказ не оформлен", actualOrder, startsWith(expectedOrder));
-
+        assertTrue("Заказ не создан",formOrderPage.isOrderPlaced(expectedOrder));
     }
 
     @Test
-    public void orderHome(){
+    public void orderHome() {
         mainPage.clickOrderButtonHome();
-        formOrderPage.inputName(name);
-        formOrderPage.inputSurname(surname);
-        formOrderPage.inputLocation(location);
-        formOrderPage.inputMetroStation(metroStation);
-        formOrderPage.inputPhone(phone);
-        formOrderPage.clickButtonForch();
-        formOrderPage.inputDateOrder(date);
-        formOrderPage.rentalTime(time);
-        formOrderPage.clickColorScooter(color);
-        formOrderPage.inputComentCourier(comment);
-        formOrderPage.clickButtonFormOrder();
+        formOrderPage.whoseScooter(name, surname, location, metroStation, phone);
+        formOrderPage.aboutRent(date, time, color, comment);
         formOrderPage.clickButtonYesOrder();
-
-        String actual = driver.findElement(By.xpath("//div[@class='Order_ModalHeader__3FDaJ'][contains(text(), 'Заказ оформлен')]")).getText();
-
-        //Сравнение ОР с ФР
-        MatcherAssert.assertThat("Заказ не оформлен",actual, startsWith(expectedOrder));
-
+        assertTrue("Заказ не создан",formOrderPage.isOrderPlaced(expectedOrder));
     }
 
 }

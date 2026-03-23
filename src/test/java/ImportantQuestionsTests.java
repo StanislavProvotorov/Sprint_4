@@ -1,11 +1,7 @@
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import static org.hamcrest.CoreMatchers.startsWith;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class ImportantQuestionsTests extends BaseUITest {
@@ -17,7 +13,7 @@ public class ImportantQuestionsTests extends BaseUITest {
         this.question = question;
         this.answel = answel;
     }
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Тестовые данные: {0} {1} {2} {3} {4} {5} {6} {7}")
     public static Object[][] getTest() {
         return new Object[][]{
                 {"Сколько это стоит? И как оплатить?","Сутки — 400 рублей. Оплата курьеру — наличными или картой."},
@@ -31,28 +27,11 @@ public class ImportantQuestionsTests extends BaseUITest {
         };
     }
 
-
     @Test
-    public void accordionTest(){
-        scrollQuestion();
-        clickQuestion();
-
-        String actual = driver.findElement(By.xpath("//p[contains(text(), '" + answel + "')]")).getText();
-
-        Assert.assertThat ("Не совпал ответ: "+question,actual, startsWith(answel));
-
-
+    public void accordionTest() {
+        mainPage.scrollQuestion(question);
+        mainPage.clickQuestion(question);
+        assertTrue("Текст ответа на вопрос не верный",mainPage.isAnswelText(answel));
     }
-    //Скролл до нужного вопроса
-    public void scrollQuestion() {
-        WebElement element = driver.findElement(By.xpath("//div[contains(text(), '" + question + "')]"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-    }
-
-    //Клик по вопросу
-    public void clickQuestion() {
-        driver.findElement(By.xpath("//div[contains(text(), '" + question + "')]")).click();
-    }
-
 
 }
