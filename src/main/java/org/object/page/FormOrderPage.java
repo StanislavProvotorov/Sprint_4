@@ -1,4 +1,5 @@
 package org.object.page;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -6,14 +7,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-
 public class FormOrderPage {
     WebDriver driver;
 
     public FormOrderPage(WebDriver driver) {
         this.driver = driver;
     }
-
 
     //Поле ввода "Имя"
     private By nameLocator = By.cssSelector("input[placeholder='* Имя']");
@@ -40,24 +39,30 @@ public class FormOrderPage {
     private By openRentalListLocator = By.cssSelector(".Dropdown-arrow");
 
     //Выбор элемента списка "Сутки"
-    private By orderDey1Locator = By.xpath("//div[@role='option'][contains(text(),'сутки')]");
-    //Выбор элемента списка "Двое суток"
-    private By orderDey2Locator = By.xpath("//div[@role='option'][contains(text(),'двое суток')]");
-    //Выбор элемента списка "Трое суток"
-    private By orderDey3Locator = By.xpath("//div[@role='option'][contains(text(),'трое суток')]");
-    //Выбор элемента списка "Четверо суток"
-    private By orderDey4Locator = By.xpath("//div[@role='option'][contains(text(),'четверо суток')]");
-    //Выбор элемента списка "Пятеро суток"
-    private By orderDey5Locator = By.xpath("//div[@role='option'][contains(text(),'пятеро суток')]");
-    //Выбор элемента списка "Шестеро суток"
-    private By orderDey6Locator = By.xpath("//div[@role='option'][contains(text(),'шестеро суток')]");
-    //Выбор элемента списка "Семеро суток"
-    private By orderDey7Locator = By.xpath("//div[@role='option'][contains(text(),'семеро суток')]");
+    private By orderOneDeyLocator = By.xpath("//div[@role='option'][contains(text(),'сутки')]");
 
+    //Выбор элемента списка "Двое суток"
+    private By orderTwoDeyLocator = By.xpath("//div[@role='option'][contains(text(),'двое суток')]");
+
+    //Выбор элемента списка "Трое суток"
+    private By orderThreeDeyLocator = By.xpath("//div[@role='option'][contains(text(),'трое суток')]");
+
+    //Выбор элемента списка "Четверо суток"
+    private By orderFourDeyLocator = By.xpath("//div[@role='option'][contains(text(),'четверо суток')]");
+
+    //Выбор элемента списка "Пятеро суток"
+    private By orderFiveDeyLocator = By.xpath("//div[@role='option'][contains(text(),'пятеро суток')]");
+
+    //Выбор элемента списка "Шестеро суток"
+    private By orderSixDeyLocator = By.xpath("//div[@role='option'][contains(text(),'шестеро суток')]");
+
+    //Выбор элемента списка "Семеро суток"
+    private By orderSevenDeyLocator = By.xpath("//div[@role='option'][contains(text(),'семеро суток')]");
 
     //Выбор цвета самоката
     //"Черный жемчуг"
     private By blackColorScooterLocator = By.xpath("//input[@id='black']");
+
     //"Серая безысходность
     private By greyColorScooterLocator = By.xpath("//input[@id='grey']");
 
@@ -66,9 +71,9 @@ public class FormOrderPage {
 
     //Кнопка в форме "Заказать"
     private By buttonFormOrderLocator = By.cssSelector("button[class='Button_Button__ra12g Button_Middle__1CSJM']");
+
     //Кнопка подтверждения заказа "Да"
     private By buttonYesOrderLocator = By.cssSelector("div[class='Order_Modal__YZ-d3'] button[class='Button_Button__ra12g Button_Middle__1CSJM']");
-
 
     //Вводим имя
     public void inputName(String name) {
@@ -110,19 +115,19 @@ public class FormOrderPage {
     public void rentalTime(String time) {
         driver.findElement(openRentalListLocator).click();
         if (time == "сутки") {
-            driver.findElement(orderDey1Locator).click();
+            driver.findElement(orderOneDeyLocator).click();
         } else if (time == "двое суток") {
-            driver.findElement(orderDey2Locator).click();
+            driver.findElement(orderTwoDeyLocator).click();
         } else if (time == "трое суток") {
-            driver.findElement(orderDey3Locator).click();
+            driver.findElement(orderThreeDeyLocator).click();
         } else if (time == "четверо суток") {
-            driver.findElement(orderDey4Locator).click();
+            driver.findElement(orderFourDeyLocator).click();
         } else if (time == "пятеро суток") {
-            driver.findElement(orderDey5Locator).click();
+            driver.findElement(orderFiveDeyLocator).click();
         } else if (time == "шестеро суток") {
-            driver.findElement(orderDey6Locator).click();
+            driver.findElement(orderSixDeyLocator).click();
         } else if (time == "семеро суток") {
-            driver.findElement(orderDey7Locator).click();
+            driver.findElement(orderSevenDeyLocator).click();
         }
     }
 
@@ -133,7 +138,6 @@ public class FormOrderPage {
         } else if (color == "Серая безысходность") {
             driver.findElement(greyColorScooterLocator).click();
         }
-
     }
 
     //Ввод коvментария для курьера
@@ -167,8 +171,9 @@ public class FormOrderPage {
         inputPhone(phone);
         clickButtonForch();
     }
+
     //Заполняем "про аренду"
-    public void aboutRent(String date,String time,String color,String comment){
+    public void aboutRent(String date, String time, String color, String comment) {
         inputDateOrder(date);
         rentalTime(time);
         clickColorScooter(color);

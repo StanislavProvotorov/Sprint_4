@@ -8,13 +8,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BaseUITest {
-    FormOrderPage formOrderPage ;
+    FormOrderPage formOrderPage;
     WebDriver driver;
     MainPage mainPage;
 
-
     @Before
-
     public void startBrowser() {
         String browser = System.getProperty("browser", "chrome");
         if (browser.equals("chrome")) {
@@ -25,28 +23,25 @@ public class BaseUITest {
 
         mainPage.openPage();
         mainPage.closeCookie();
-
-
     }
-        public void startBrowserChrome(){
+
+    public void startBrowserChrome() {
         driver = new ChromeDriver();
         WebDriverManager.chromedriver().setup();
-            formOrderPage = new FormOrderPage(driver);
-            mainPage = new MainPage(driver);
-        }
-
-        public void startBrowserFirefox(){
-
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
-            formOrderPage = new FormOrderPage(driver);
-            mainPage = new MainPage(driver);
-        }
-
-    @After
-    public void closeBrowser(){
-        driver.quit();
+        formOrderPage = new FormOrderPage(driver);
+        mainPage = new MainPage(driver);
     }
 
+    public void startBrowserFirefox() {
 
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver();
+        formOrderPage = new FormOrderPage(driver);
+        mainPage = new MainPage(driver);
+    }
+
+    @After
+    public void closeBrowser() {
+        driver.quit();
+    }
 }

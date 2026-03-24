@@ -1,14 +1,12 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 
 public class OrderTests extends BaseUITest {
-
-
-
     private final String name;
     private final String surname;
     private final String location;
@@ -20,8 +18,7 @@ public class OrderTests extends BaseUITest {
     private final String comment;
     String expectedOrder = "Заказ оформлен";
 
-
-    public OrderTests (String name, String surname, String location, String metroStation, String phone, String date, String time, String color, String comment) {
+    public OrderTests(String name, String surname, String location, String metroStation, String phone, String date, String time, String color, String comment) {
         this.name = name;
         this.surname = surname;
         this.location = location;
@@ -35,7 +32,7 @@ public class OrderTests extends BaseUITest {
 
     @Parameterized.Parameters
     public static Object[][] getTest() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Иван", "Иванов", "Дзержинского 85", "Черкизовская", "+79995554466", "25.03.2026", "сутки", "black", "Прихватите зарядку"},
                 {"Петр", "Петров", "Крестьянская 35", "Спортивная", "+79267775522", "31.03.2026", "четверо суток", "grey", ""},
         };
@@ -47,7 +44,7 @@ public class OrderTests extends BaseUITest {
         formOrderPage.whoseScooter(name, surname, location, metroStation, phone);
         formOrderPage.aboutRent(date, time, color, comment);
         formOrderPage.clickButtonYesOrder();
-        assertTrue("Заказ не создан",formOrderPage.isOrderPlaced(expectedOrder));
+        assertTrue("Заказ не создан", formOrderPage.isOrderPlaced(expectedOrder));
     }
 
     @Test
@@ -56,7 +53,6 @@ public class OrderTests extends BaseUITest {
         formOrderPage.whoseScooter(name, surname, location, metroStation, phone);
         formOrderPage.aboutRent(date, time, color, comment);
         formOrderPage.clickButtonYesOrder();
-        assertTrue("Заказ не создан",formOrderPage.isOrderPlaced(expectedOrder));
+        assertTrue("Заказ не создан", formOrderPage.isOrderPlaced(expectedOrder));
     }
-
 }
